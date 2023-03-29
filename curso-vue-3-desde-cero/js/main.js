@@ -5,5 +5,12 @@ const app = Vue.createApp({
             message: 'Hello Vue!',
         };
     },
+    methods: {
+        async doSearch() {
+            let response = await fetch(API + 'Santiago-DevCol')
+            const data = await response.json()
+            console.log(data);
+        }
+    }
 });
 
