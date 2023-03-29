@@ -28,15 +28,17 @@
 
             <!-- Result -->
                 <div class="result" v-if="result">
-                    <h2 class="result__name">Juancho</h2>
-                    <img src="https://avatars.githubusercontent.com/u/112650589?v=4" alt="" class="result__avatar">
+                    <h2 class="result__name">{{result.name}}</h2>
+                    <img :src="result.avatar_url" :alt="result.name" class="result__avatar">
                     <p class="result__bio">
-                        Especialista en aprender 
+                        {{result.bio}} <br>
+                        <a :href="result.blog" target="_blank" class="result__blog">{{result.blog}}</a>
+
                     </p>
 
                 </div>
             <!-- Error -->
-            <div class="result__error" v-if="error">No encontrado</div>
+            <div class="result__error" v-if="error">{{error}}</div>
         </article>
     </div>
     <script src="js/main.js"></script>
