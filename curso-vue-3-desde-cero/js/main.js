@@ -4,8 +4,17 @@ const app = Vue.createApp({
         return {
             search: null,
             result: null,
-            error: null
+            error: null,
+            favorites: new Map()
         };
+    },
+    computed:{
+        isFavorite(){
+            return this.favorites.has(this.result.id)
+        },
+        allFavorites(){
+            return Array.from(this.favorites.values())
+        }
     },
     methods: {
         async doSearch() {
@@ -22,6 +31,17 @@ const app = Vue.createApp({
             } finally{
                 this.search= null
             }
+        },
+        addFavorite() {
+            this.favorites.set(this.result.id, this.result)
+            this.updateStorage()
+        },
+        removeFavorite() {
+            this.favorites.delete(this.result.id)
+            this.updateStorage()
+        },
+        updateStorage(){
+            window.localStorage.setItem('favorites',JSON.stringify(this.allFavorites))
         }
     }
 });

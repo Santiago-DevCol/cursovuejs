@@ -14,6 +14,11 @@
     <div id="app">
         <!-- Favorites -->
         <div class="favorites">
+            <div class="favorite" v-for="favorite in allFavorites">
+                <a :href="favorite.html_url" target="_blank">
+                    <img :src="favorite.avatar_url" :alt="favorite.name" class="favorite__avatar">
+                </a>
+            </div>
         </div>
 
         <!-- Content -->
@@ -28,6 +33,8 @@
 
             <!-- Result -->
                 <div class="result" v-if="result">
+                    <a v-if="isFavorite" href="#" class="result__toggle-favorite" @click="removeFavorite"> Quitar de favoritos ⭐</a>
+                    <a v-else href="#" class="result__toggle-favorite" @click="addFavorite"> Agregar a favoritos ⭐</a>
                     <h2 class="result__name">{{result.name}}</h2>
                     <img :src="result.avatar_url" :alt="result.name" class="result__avatar">
                     <p class="result__bio">
