@@ -29,6 +29,7 @@ const app = Vue.createApp({
 
             this.result = this.error = null
             const foubdInFavorites = this.favorites.get(this.search)
+            console.log(foubdInFavorites);
 
             const shouldrequestAgain = (() => {
                 if (!!foubdInFavorites) {
@@ -51,9 +52,9 @@ const app = Vue.createApp({
                 const data = await response.json()
                 console.log(data);
                 this.result=data
-                foubdInFavorites.lastRequestTime = Date.now()
+                //foubdInFavorites.lastRequestTime = Date.now()
             } catch (error) {
-                this.error= error
+                console.log(this.error= error);
             } finally{
                 this.search= null
             }
@@ -69,6 +70,9 @@ const app = Vue.createApp({
         },
         showFavorite(favorite){
             this.result = favorite
+        },
+        checkFavorite(id){
+            return this.result?.login === id
         },
         updateStorage(){
             window.localStorage.setItem('favorites',JSON.stringify(this.allFavorites))
